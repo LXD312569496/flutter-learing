@@ -3,7 +3,7 @@
 主要是学习FutureBuilder的使用，利用FutureBuilder来实现懒加载，并可以监听加载过程的状态
 这个Demo是加载玩Android的一个页面的列表数据
 
-![demo图片]()
+![](https://github.com/LXD312569496/flutter-learing/blob/master/future_builder_learning/future_builder.jpg)
 
 ## Getting Started
 

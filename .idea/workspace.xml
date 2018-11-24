@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3b87930d-af8d-4a22-9577-5b2a89c687ca" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/base_listview/lib/baselistview.dart" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/base_listview/lib/main.dart" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/future_builder_learning/future_builder.jpg" />
-      <change beforePath="$PROJECT_DIR$/.idea/flutter-learing.iml" afterPath="$PROJECT_DIR$/.idea/flutter-learing.iml" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/future_builder_learning/README.md" afterPath="$PROJECT_DIR$/future_builder_learning/README.md" />
-      <change beforePath="$PROJECT_DIR$/future_builder_learning/lib/main.dart" afterPath="$PROJECT_DIR$/future_builder_learning/lib/main.dart" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -38,8 +32,8 @@
         <entry file="file://$PROJECT_DIR$/future_builder_learning/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="0">
-                <caret line="0" column="20" lean-forward="false" selection-start-line="0" selection-start-column="20" selection-end-line="0" selection-end-column="20" />
+              <first_editor relative-caret-position="64">
+                <caret line="5" column="2" lean-forward="false" selection-start-line="5" selection-start-column="2" selection-end-line="5" selection-end-column="2" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -634,8 +628,8 @@
       </provider>
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="0">
-            <caret line="0" column="20" lean-forward="false" selection-start-line="0" selection-start-column="20" selection-end-line="0" selection-end-column="20" />
+          <first_editor relative-caret-position="64">
+            <caret line="5" column="2" lean-forward="false" selection-start-line="5" selection-start-column="2" selection-end-line="5" selection-end-column="2" />
             <folding />
           </first_editor>
           <second_editor />
