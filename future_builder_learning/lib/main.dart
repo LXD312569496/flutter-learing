@@ -33,28 +33,31 @@ class FutureBuilderPage extends StatefulWidget {
 }
 
 class _FutureBuilderPageState extends State<FutureBuilderPage> {
-
   Future future;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    future=getdata();
+    future = getdata();
   }
 
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      appBar: new AppBar(title: new Text("知识体系"),actions: <Widget>[
-        new IconButton(icon: Icon(Icons.search,color: Colors.white,), onPressed: null)
-      ],),
-//      body: new RefreshIndicator(child: buildFutureBuilder(), onRefresh: getdata),
-//    todo:RefreshIndicator和FutureBuilder的放的位置问题，谁放在内部
-
-      body:  buildFutureBuilder(),
-
-      floatingActionButton: new FloatingActionButton(onPressed: (){
+      appBar: new AppBar(
+        title: new Text("知识体系"),
+        actions: <Widget>[
+          new IconButton(
+              icon: Icon(
+                Icons.search,
+                color: Colors.white,
+              ),
+              onPressed: null)
+        ],
+      ),
+      body: buildFutureBuilder(),
+      floatingActionButton: new FloatingActionButton(onPressed: () {
         setState(() {
           //测试futurebuilder是否进行没必要的重绘操作
         });
@@ -65,6 +68,7 @@ class _FutureBuilderPageState extends State<FutureBuilderPage> {
   FutureBuilder<List<Data>> buildFutureBuilder() {
     return new FutureBuilder<List<Data>>(
       builder: (context, AsyncSnapshot<List<Data>> async) {
+        //在这里根据快照的状态，返回相应的widget
         if (async.connectionState == ConnectionState.active ||
             async.connectionState == ConnectionState.waiting) {
           return new Center(
@@ -79,21 +83,8 @@ class _FutureBuilderPageState extends State<FutureBuilderPage> {
             );
           } else if (async.hasData) {
             List<Data> list = async.data;
-            return new RefreshIndicator(child: new ListView.builder(
-              itemBuilder: (context, index) {
-                Data bean = list[index];
-                StringBuffer str = new StringBuffer();
-                for(Children children in bean.children){
-                  str.write(children.name+"  ");
-                }
-                return new ListTile(
-                  title: new Text(bean.name),
-                  subtitle: new Text(str.toString()),
-                  trailing: new IconButton(icon: new Icon(Icons.navigate_next,color: Colors.grey,), onPressed: (){}),
-                );
-              },
-              itemCount: list.length,
-            ), onRefresh: getdata);
+            return new RefreshIndicator(
+                child: buildListView(context, list), onRefresh: refresh);
           }
         }
       },
@@ -101,12 +92,44 @@ class _FutureBuilderPageState extends State<FutureBuilderPage> {
     );
   }
 
+  buildListView(BuildContext context, List<Data> list) {
+    return new ListView.builder(
+      itemBuilder: (context, index) {
+        Data bean = list[index];
+        StringBuffer str = new StringBuffer();
+        for (Children children in bean.children) {
+          str.write(children.name + "  ");
+        }
+        return new ListTile(
+          title: new Text(bean.name),
+          subtitle: new Text(str.toString()),
+          trailing: new IconButton(
+              icon: new Icon(
+                Icons.navigate_next,
+                color: Colors.grey,
+              ),
+              onPressed: () {}),
+        );
+      },
+      itemCount: list.length,
+    );
+  }
+
+  //获取数据的逻辑，利用dio库进行网络请求，拿到数据后利用json_serializable解析json数据
+  //并将列表的数据包装在一个future中
   Future<List<Data>> getdata() async {
+    debugPrint("getdata");
     var dio = new Dio();
     Response response = await dio.get("http://www.wanandroid.com/tree/json");
     Map<String, dynamic> map = response.data;
     Entity entity = Entity.fromJson(map);
-
     return entity.data;
+  }
+
+  //刷新数据,重新设置future就行了
+  Future refresh() async {
+    setState(() {
+      future = getdata();
+    });
   }
 }
