@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="3b87930d-af8d-4a22-9577-5b2a89c687ca" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/future_builder_learning/README.md" afterPath="$PROJECT_DIR$/future_builder_learning/README.md" />
+      <change beforePath="$PROJECT_DIR$/future_builder_learning/future_builder.jpg" afterPath="$PROJECT_DIR$/future_builder_learning/future_builder.jpg" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -31,9 +32,9 @@
       <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/future_builder_learning/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-            <state split_layout="SPLIT">
-              <first_editor relative-caret-position="64">
-                <caret line="5" column="2" lean-forward="false" selection-start-line="5" selection-start-column="2" selection-end-line="5" selection-end-column="2" />
+            <state split_layout="FIRST">
+              <first_editor relative-caret-position="85">
+                <caret line="5" column="37" lean-forward="false" selection-start-line="5" selection-start-column="37" selection-end-line="5" selection-end-column="37" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -141,6 +142,11 @@
             <path>
               <item name="flutter-learing" type="b2602c69:ProjectViewProjectNode" />
               <item name="flutter-learing" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="flutter-learing" type="b2602c69:ProjectViewProjectNode" />
+              <item name="flutter-learing" type="462c0819:PsiDirectoryNode" />
+              <item name="future_builder_learning" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -627,9 +633,9 @@
         </state>
       </provider>
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="64">
-            <caret line="5" column="2" lean-forward="false" selection-start-line="5" selection-start-column="2" selection-end-line="5" selection-end-column="2" />
+        <state split_layout="FIRST">
+          <first_editor relative-caret-position="85">
+            <caret line="5" column="37" lean-forward="false" selection-start-line="5" selection-start-column="37" selection-end-line="5" selection-end-column="37" />
             <folding />
           </first_editor>
           <second_editor />

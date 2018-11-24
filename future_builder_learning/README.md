@@ -16,7 +16,7 @@
 #### 下拉刷新RefreshIndicator，列表ListView，这里不做过多介绍
 #### FutureBuilder:Flutter应用中的异步模型，基于与Future交互的最新快照来构建自身的widget
 
-官方文档：[https://docs.flutter.io/flutter/widgets/FutureBuilder-class.html]()
+官方文档：[https://docs.flutter.io/flutter/widgets/FutureBuilder-class.html](https://docs.flutter.io/flutter/widgets/FutureBuilder-class.html)
 
 ```
 const FutureBuilder({
@@ -66,7 +66,7 @@ FutureBuilder<String>(
 ```
 
 ### 3.实现思路，布局方式
-· 网络请求：利用Dio库来请求玩Android的知识体系列表，api:[http://www.wanandroid.com/tree/json]()
+· 网络请求：利用Dio库来请求玩Android的知识体系列表，api:[http://www.wanandroid.com/tree/json](http://www.wanandroid.com/tree/json)
 序列化json：利用json_serializable来解析返回的json数据
 
 布局：加载过程显示CircularProgressIndicator，加载完成把数据显示到ListView中，
@@ -218,7 +218,7 @@ class _FutureBuilderPageState extends State<FutureBuilderPage> {
 ### 5.注意的问题和踩坑
 1. 防止FutureBuilder进行不必要的重绘：这里我采用的方法，是将getData（）赋值给一个future的成员变量，
 用它来保存getData（）的结果，以避免不必要的重绘
-参考文章：[https://blog.csdn.net/u011272795/article/details/83010974]()
+参考文章：[https://blog.csdn.net/u011272795/article/details/83010974](https://blog.csdn.net/u011272795/article/details/83010974)
 2. FutureBuilder和RefreshIndicator的嵌套问题，到底谁是谁的child，这里我是把RefreshIndicator作为FutureBuilder
 的孩子。如果将RefreshIndicator放在外层，FutureBuilder作为child的话，当RefreshIndicator调用onrefreh刷新数据并用
 setState（）去更新界面的时候，那FutureBuilder也会再次经历生命周期，所以导致获取数据的逻辑会被走两遍
