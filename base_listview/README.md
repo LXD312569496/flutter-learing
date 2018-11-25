@@ -201,6 +201,6 @@ Future refresh() async {
     setState（）去更新界面的时候，那FutureBuilder也会再次经历生命周期，所以导致获取数据的逻辑会被走两遍
 
 ### 6.下一步TODO
-    存在的问题：当所有数据都已请求回来后，设置不能再加载更多，这个时候会多刷新来一次页面，暂时还未解决这个问题。
-    继续完善这个Baselistview。
-    封装另外一种Baselistview，用RefreshIndicator和NotificationListener来封装就行。
+   * 存在的问题：当所有数据都已请求回来后，设置不能再加载更多，这个时候会多刷新来一次页面，暂时还未解决这个问题。
+   * 继续完善这个Baselistview。
+   * 封装另外一种Baselistview，用RefreshIndicator和NotificationListener来封装就行。
