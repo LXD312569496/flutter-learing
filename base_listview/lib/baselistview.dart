@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 
 //类型定义
 typedef Future<List<T>> PageRequest<T>(int page, int pageSize);
-typedef Widget ItemBuilder<T>(List<T>list, int position);
-
+typedef Widget ItemBuilder<T>(List<T> list, int position);
 
 class BaseListView<T> extends StatefulWidget {
-
   PageRequest<T> pageRequest;
   ItemBuilder<T> itemBuilder;
   int pageSize;
@@ -15,32 +13,32 @@ class BaseListView<T> extends StatefulWidget {
   bool enableRefresh;
   bool hasHeader;
   Widget header;
-  int total = -1;
+  int total = 25;
 
   BaseListView(this.pageRequest, this.itemBuilder,
-      {this.pageSize = 20, this.page = 0,
-        this.enableLoadmore = false,
-        this.enableRefresh = true,
-        this.hasHeader = false, this.header, this.total = -1});
+      {this.pageSize = 20,
+      this.page = 0,
+      this.enableLoadmore = false,
+      this.enableRefresh = true,
+      this.hasHeader = false,
+      this.header,
+      this.total = 25});
 
   @override
   State<StatefulWidget> createState() => new _BaseListViewState<T>();
 
-
-  //比如当没有更多客源加载的时候，就可以设置enableLoadmore为false
-  void setEnalbeLoadMore(bool enableLoadmore) {
-    this.enableLoadmore = enableLoadmore;
-  }
-
-  void setTotal(int total) {
-    this.total = total;
-  }
-
+//  todo:有问题
+//  //比如当没有更多客源加载的时候，就可以设置enableLoadmore为false
+//  void setEnalbeLoadMore(bool enableLoadmore) {
+//    this.enableLoadmore = enableLoadmore;
+//  }
+//
+//  void setTotal(int total) {
+//    this.total = total;
+//  }
 }
 
-
 class _BaseListViewState<T> extends State<BaseListView<T>> {
-
   List<T> _list = new List();
 
   ScrollController controller;
@@ -49,7 +47,6 @@ class _BaseListViewState<T> extends State<BaseListView<T>> {
   //这个future是用来给FutureBuilder进行获取数据的，另一个方面是可以避免没必要的重绘
   Future future;
 
-  //todo：futureBuilder有问题，每次setState之后更新会有问题
   FutureBuilder<List<T>> futureBuilder;
 
   @override
@@ -57,6 +54,10 @@ class _BaseListViewState<T> extends State<BaseListView<T>> {
     future = loadData(widget.page, widget.pageSize);
     futureBuilder = buildFutureBuilder();
 
+    /**这部分代码主要是设置滑动监听，滑动到距离底部100单位的时候，开始进行loadmore操作
+        如果controller.position.pixels==controller.position.maxScrollExtent再去
+        进行loadmore操作的话，实际的显示和操作会有点奇怪，所以这里设置距离底部100
+     */
     controller = new ScrollController();
     controller.addListener(() {
       if (controller.position.pixels >=
@@ -78,7 +79,9 @@ class _BaseListViewState<T> extends State<BaseListView<T>> {
     return futureBuilder;
   }
 
-
+  /**
+   * 构造FutureBuilder
+   */
   FutureBuilder<List<T>> buildFutureBuilder() {
     return new FutureBuilder<List<T>>(
       builder: (context, AsyncSnapshot<List<T>> async) {
@@ -112,34 +115,29 @@ class _BaseListViewState<T> extends State<BaseListView<T>> {
               widget.enableLoadmore = true;
             }
 
-            debugPrint("loadData hasData:page:${widget.page},pageSize:${widget
-                .pageSize},list:${_list.length}");
+            debugPrint(
+                "loadData hasData:page:${widget.page},pageSize:${widget.pageSize},list:${_list.length}");
 
             //计算最终的list长度
-            int length = _list.length +
-                (widget.hasHeader ? 1 : 0);
+            int length = _list.length + (widget.hasHeader ? 1 : 0);
 
-            return new RefreshIndicator(child: new ListView.separated(
-              physics: AlwaysScrollableScrollPhysics(),
-              controller: widget.enableLoadmore ? controller : null,
-              itemBuilder:
-                  (context, index) {
-//                TODO:头部的更新，可能要放在外面，放在里面的话也行，不过要封装获取头部future的逻辑,然后提供一个外部builder给外部进行构造
-//                目前需要在外面判断position是否为0去构造头部
-//                if (widget.hasHeader && index == 0 && widget.header != null) {
-//                  return widget.header;
-//                }
-                //最后一个
-                if (widget.enableLoadmore && index == length) {
-                  return new LoadMoreItem();
-                }
-                return widget.itemBuilder(_list, index);
-              },
-              itemCount: length + (widget.enableLoadmore ? 1 : 0),
-              separatorBuilder: (BuildContext context, int index) {
-                return new Divider();
-              },
-            ), onRefresh: refresh);
+            return new RefreshIndicator(
+                child: new ListView.separated(
+                  physics: AlwaysScrollableScrollPhysics(),
+                  controller: widget.enableLoadmore ? controller : null,
+                  itemBuilder: (context, index) {
+                    //可以加载更多的时候，最后一个item显示菊花
+                    if (widget.enableLoadmore && index == length) {
+                      return new LoadMoreItem();
+                    }
+                    return widget.itemBuilder(_list, index);
+                  },
+                  itemCount: length + (widget.enableLoadmore ? 1 : 0),
+                  separatorBuilder: (BuildContext context, int index) {
+                    return new Divider();
+                  },
+                ),
+                onRefresh: refresh);
           }
         }
       },
@@ -171,9 +169,7 @@ class _BaseListViewState<T> extends State<BaseListView<T>> {
       setState(() {
         isLoading = false;
 
-        //todo：这里直接addAll并setState是无效的，要重新build一下FutureBuilder
         _list.addAll(data);
-        //todo:因为是同一个future，所以不会走加载数据过程的逻辑，而是直接走到done的状态????
         futureBuilder = buildFutureBuilder();
       });
     });
@@ -183,9 +179,7 @@ class _BaseListViewState<T> extends State<BaseListView<T>> {
     debugPrint("loadData:page:$page,pageSize:$pageSize,list:${_list.length}");
     return await widget.pageRequest(page, pageSize);
   }
-
 }
-
 
 class LoadMoreItem extends StatefulWidget {
   @override
@@ -196,13 +190,14 @@ class _LoadMoreItemState extends State<LoadMoreItem> {
   @override
   Widget build(BuildContext context) {
     return new Container(
-      child: new Center(child:
-      new CircularProgressIndicator(),),);
+      child: new Center(
+        child: new CircularProgressIndicator(),
+      ),
+    );
   }
 }
 
 class RetryItem extends StatelessWidget {
-
   GestureTapCallback ontap;
 
   RetryItem(this.ontap);
@@ -218,7 +213,6 @@ class RetryItem extends StatelessWidget {
 }
 
 class EmptyItem extends StatelessWidget {
-
   GestureTapCallback ontap;
 
   EmptyItem(this.ontap);

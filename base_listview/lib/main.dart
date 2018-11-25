@@ -29,10 +29,13 @@ class _FutureBuilderPageState extends State<FutureBuilderPage> {
   PageRequest<String> pageRequest;
   ItemBuilder<String> itemBuilder;
 
+  BaseListView<String> baseListView;
   @override
   void initState() {
     itemBuilder = getItem;
     pageRequest = loadData;
+    baseListView=new BaseListView<String>(
+      pageRequest, itemBuilder, enableLoadmore: true,);
   }
 
   @override
@@ -43,8 +46,7 @@ class _FutureBuilderPageState extends State<FutureBuilderPage> {
             icon: Icon(Icons.search, color: Colors.white,), onPressed: null)
       ],),
 
-      body: new BaseListView<String>(
-        pageRequest, itemBuilder, enableLoadmore: true,),
+      body: baseListView,
 
       floatingActionButton: new FloatingActionButton(onPressed: () {
         setState(() {
