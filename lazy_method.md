@@ -93,4 +93,4 @@ Extract method的作用是：可以把某一个widget控件的代码，帮你封
 ![](https://user-gold-cdn.xitu.io/2018/11/29/1675fad765abf0c8?w=1309&h=943&f=png&s=82788)
 
  
-
+### 6.使用random_pk库，在开发中也可以达到调试布局的作用
