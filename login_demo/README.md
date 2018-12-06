@@ -1,8 +1,9 @@
-# login_demo
+## 练手撸一个登录注册界面
 
 A new Flutter project.
 
 ## Getting Started
 
-For help getting started with Flutter, view our online
-[documentation](https://flutter.io/).
+![https://github.com/LXD312569496/flutter-learing/blob/master/login_demo/pic1.png](https://github.com/LXD312569496/flutter-learing/blob/master/login_demo/pic1.png)
+![https://github.com/LXD312569496/flutter-learing/blob/master/login_demo/pic1.png](https://github.com/LXD312569496/flutter-learing/blob/master/login_demo/pic2.png)
+
