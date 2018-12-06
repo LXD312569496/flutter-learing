@@ -40,6 +40,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return new Scaffold(
       /**
+       * SafeArea，让内容显示在安全的可见区域
        * SafeArea，可以避免一些屏幕有刘海或者凹槽的问题
        */
         body: new SafeArea(
@@ -90,7 +91,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                           children: <Widget>[
                             Expanded(child: new Container(
                               /**
-                               * TODO:暂时不会用Paint去自定义indicator，所以可能要取巧实现
+                               * TODO:暂时不会用Paint去自定义indicator，所以暂时只能这样实现了
                                */
                               decoration: _currentPage == 0 ? BoxDecoration(
                                 borderRadius: BorderRadius.all(
