@@ -21,3 +21,5 @@
 ##### 9. 理解Flutter中的context、state、widget
 
 ##### 10. Flutter的绘制过程
+
+##### 11. [在Flutter中使用Flare构建的动画](https://github.com/LXD312569496/flutter-learing/blob/master/flare_learning/README.md)

@@ -23,7 +23,7 @@
 
 ![](https://github.com/LXD312569496/flutter-learing/blob/master/flare_learning/pic2.jpg)
 
-![](https://github.com/LXD312569496/flutter-learing/blob/master/flare_learning/pic3.jpg)
+![](https://github.com/LXD312569496/flutter-learing/blob/master/flare_learning/pic3.png)
 
 点击Animate页面，就可以看到左下角，会显示所拥有的动画Animations
 
@@ -91,7 +91,7 @@ import 'package:nima/nima_actor.dart';
   }
 
 ```
-![](https://github.com/LXD312569496/flutter-learing/blob/master/flare_learning/pic4.jpg)
+![](https://github.com/LXD312569496/flutter-learing/blob/master/flare_learning/pic4.png)
 
 
 
