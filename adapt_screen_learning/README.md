@@ -307,7 +307,7 @@ if(width > 600) {
 
 自己也跟着原作者撸了下demo，顺便加了点注释，方便自己理解。
 
-自己的Github链接：[]()
+自己的Github链接：[https://github.com/LXD312569496/flutter-learing/tree/master/adapt_screen_learning](https://github.com/LXD312569496/flutter-learing/tree/master/adapt_screen_learning)
 
 原作者：[https://github.com/deven98/FlutterAdaptiveLayouts](https://github.com/deven98/FlutterAdaptiveLayouts)
 
