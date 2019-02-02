@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:dialog_learning/DialogUtils.dart';
-import 'package:random_pk/random_pk.dart';
-import 'package:dialog_learning/LoadingDialog.dart';
+import 'package:flutter/cupertino.dart';
 
 void main() => runApp(new MyApp());
 
@@ -39,9 +38,19 @@ class _MyHomePageState extends State<MyHomePage> {
         children: <Widget>[
           new RaisedButton(
               onPressed: () {
-                showMyDialog(context);
+                showMySimpleDialog(context);
               },
-              child: new Text("显示一个普通的对话框")),
+              child: new Text("显示SimpleDialog,Material风格")),
+          new RaisedButton(
+              onPressed: () {
+                showMyMaterialDialog(context);
+              },
+              child: new Text("显示AlertDialog,Material风格")),
+          new RaisedButton(
+              onPressed: () {
+                showMyCupertinoDialog(context);
+              },
+              child: new Text("显示AlertDialog,IOS风格")),
           new RaisedButton(
               onPressed: () {
                 showMyDialogWithValue(context);
@@ -57,55 +66,22 @@ class _MyHomePageState extends State<MyHomePage> {
                 showMyDialogWithListView(context);
               },
               child: new Text("显示一个ListView的对话框")),
-          new Divider(
-            color: Colors.black,
-          ),
-          new Text("使用封装的工具类展示对话框"),
           new RaisedButton(
               onPressed: () {
-                DialogUtil().showMyDialog<String>(context,
-                    title: new Text("title"),
-                    content: new Text("content"), onConfim: () {
-                  Navigator.of(context).pop("点击了确认");
-                }, onCancle: () {
-                  Navigator.of(context).pop("点击了取消");
-                }).then((value) {
-                  debugPrint("对话框消失:$value");
-                });
+                showMyDialogWithStateBuilder(context);
               },
-              child: new Text("显示一个有返回值的对话框")),
+              child: new Text("显示一个StatefulBuilder的对话框")),
           new RaisedButton(
               onPressed: () {
-                DialogUtil().showMyDialogWithListView(context,
-                    listview: ListView.builder(
-                        itemCount: 10,
-                        itemBuilder: (context, index) {
-                          return new SizedBox(
-                            height: 100,
-                            child: new Text("$index"),
-                          );
-                        }),
-                    width: MediaQuery.of(context).size.width * 0.8,
-                    height: MediaQuery.of(context).size.height * 0.8,
-                    onConfirm: () {},
-                    onCancel: () {});
+                showMyCustomLoadingDialog(context);
               },
-              child: new Text("显示一个ListView的对话框")),
-          new Divider(
-            color: Colors.black,
-          ),
-          new RaisedButton(
-            onPressed: () {
-              showMyCustomDialog();
-            },
-            child: new Text("自定义对话框"),
-          ),
+              child: new Text("显示一个自定义的对话框")),
         ],
       )),
     );
   }
 
-  void showMyDialog(BuildContext context) {
+  void showMyMaterialDialog(BuildContext context) {
     showDialog(
         context: context,
         builder: (context) {
@@ -122,6 +98,31 @@ class _MyHomePageState extends State<MyHomePage> {
               new FlatButton(
                 onPressed: () {
                   Navigator.of(context).pop();
+                },
+                child: new Text("取消"),
+              ),
+            ],
+          );
+        });
+  }
+
+  void showMyCupertinoDialog(BuildContext context) {
+    showCupertinoDialog(
+        context: context,
+        builder: (context) {
+          return new CupertinoAlertDialog(
+            title: new Text("title"),
+            content: new Text("内容内容内容内容内容内容内容内容内容内容内容"),
+            actions: <Widget>[
+              new FlatButton(
+                onPressed: () {
+                  Navigator.of(context).pop("点击了确定");
+                },
+                child: new Text("确认"),
+              ),
+              new FlatButton(
+                onPressed: () {
+                  Navigator.of(context).pop("点击了取消");
                 },
                 child: new Text("取消"),
               ),
@@ -300,25 +301,115 @@ class _MyHomePageState extends State<MyHomePage> {
 //    });
   }
 
-  void showMyCustomDialog() {
-    /**
-     *  通过下面的这个方法，可以看出默认的对话框的大小是占了大半个屏幕的
-     */
-//        showDialog(context: context,builder: (context){
-//      return new AlertDialog(content: new RandomContainer(),);
-//    });
+  void showMyDialogWithStateBuilder(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (context) {
+          bool selected = false;
+          return new AlertDialog(
+            title: new Text("StatefulBuilder"),
+            content:
+                new StatefulBuilder(builder: (context, StateSetter setState) {
+              return Container(
+                child: new CheckboxListTile(
+                    title: new Text("选项"),
+                    value: selected,
+                    onChanged: (bool) {
+                      setState(() {
+                        selected = !selected;
+                      });
+                    }),
+              );
+            }),
+          );
+        });
+  }
 
-    /**    用下面注释的代码执行一遍，会发现无法把对话框展示的内容设置成自己想要的大小
-        有一些场景，默认的对话框无法满足条件，就需要自定义对话框
-     */
-//    showDialog(context: context,builder: (context){
-//      return new AlertDialog(content: new SizedBox(width: 100,height: 100,
-//      child: new RandomContainer(),),);
-//    });
+  void showMySimpleDialog(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return new SimpleDialog(
+            title: new Text("SimpleDialog"),
+            children: <Widget>[
+              new SimpleDialogOption(
+                child: new Text("SimpleDialogOption One"),
+                onPressed: () {
+                  Navigator.of(context).pop("SimpleDialogOption One");
+                },
+              ),
+              new SimpleDialogOption(
+                child: new Text("SimpleDialogOption Two"),
+                onPressed: () {
+                  Navigator.of(context).pop("SimpleDialogOption Two");
+                },
+              ),
+              new SimpleDialogOption(
+                child: new Text("SimpleDialogOption Three"),
+                onPressed: () {
+                  Navigator.of(context).pop("SimpleDialogOption Three");
+                },
+              ),
+            ],
+          );
+        });
+  }
 
-    showDialog(context: context,builder: (context){
-      return new LoadingDialog(text: "加载中");
-    });
+  void showMyCustomLoadingDialog(BuildContext context) {
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) {
+          return new MyCustomLoadingDialog();
+        });
+  }
+}
 
+class MyCustomLoadingDialog extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    Duration insetAnimationDuration = const Duration(milliseconds: 100);
+    Curve insetAnimationCurve = Curves.decelerate;
+
+    RoundedRectangleBorder _defaultDialogShape = RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(2.0)));
+
+    return AnimatedPadding(
+      padding: MediaQuery.of(context).viewInsets +
+          const EdgeInsets.symmetric(horizontal: 40.0, vertical: 24.0),
+      duration: insetAnimationDuration,
+      curve: insetAnimationCurve,
+      child: MediaQuery.removeViewInsets(
+        removeLeft: true,
+        removeTop: true,
+        removeRight: true,
+        removeBottom: true,
+        context: context,
+        child: Center(
+          child: SizedBox(
+            width: 120,
+            height: 120,
+            child: Material(
+              elevation: 24.0,
+              color: Theme.of(context).dialogBackgroundColor,
+              type: MaterialType.card,
+              child: new Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  new CircularProgressIndicator(),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 20),
+                    child: new Text("加载中"),
+                  ),
+                ],
+              ),
+              shape: _defaultDialogShape,
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }
