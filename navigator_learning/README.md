@@ -165,7 +165,9 @@ Future<T> showGeneralDialog<T>({
 push()，就是直接将一个元素插入到堆栈的顶部。
 
 这个方法很简单，并且我们会经常用到。比如从Screen1中利用navigator的push方法，将Screen2的路由弹到堆栈的顶部。堆栈的情况如下图：
+
 ![](https://user-gold-cdn.xitu.io/2019/2/3/168b15d27dce600b?w=94&h=85&f=png&s=694)
+
 可以利用下面的两个push方法，实现这个目的。
 ```
 Navigator.of(context).pushNamed("/111");
@@ -176,6 +178,7 @@ Navigator.of(context).push(route);
 pop(), 就是将堆栈的顶部元素进行删除，回退到上一个界面。
 
 比如上面的例子，在Screen2中利用pop()将顶部的Screen2从堆栈中移除，之后的堆栈如下图：
+
 ![](https://user-gold-cdn.xitu.io/2019/2/3/168b21447857bca9?w=93&h=64&f=png&s=533)
 
 ```
@@ -189,7 +192,9 @@ Navigator.of(context).pop();
 
 ### pushReplacementNamed()和popAndPushNamed()
 有下面的这种场景，我们进入到Screen3页面后，要跳转到Screen4页面，不过点击返回按钮，并不想回退到Screen3页面。也就是想将Screen4的元素插入栈顶的同时，将Screen3的元素夜进行移除。
+
 ![](https://user-gold-cdn.xitu.io/2019/2/3/168b256b313e0819?w=242&h=83&f=png&s=1045)
+
 这个时候，我们就要用到pushReplacementNamed()或者popAndPushNamed(),pushReplacement()都可以实现这个目的。
 ```
 Navigator.of(context).pushReplacementNamed('/screen4');
@@ -199,7 +204,9 @@ Navigator.of(context).pushReplacement(newRoute);
 
 ### pushNamedAndRemoveUntil()
 一般会有这种场景，我们在已经登录的情况下，在设置界面会有个退出用户登录的按钮，点击后会注销用户退出登录，并且会跳转到登录界面。那么路由栈的变化应该会如下图所示：
+
 ![](https://user-gold-cdn.xitu.io/2019/2/3/168b2606bedc5a4d?w=241&h=124&f=png&s=1658)
+
 如果只是简单的进行push一个LoginScreen的操作的话，那么按返回键的话，会回到上一个页面，这样的逻辑是不对的。
 
 所以我们应该删除掉路由栈中的所有route，然后再弹出LoginScreen。这个时候就要用到pushNamedAndRemoveUntil()或者pushAndRemoveUntil()了。
@@ -219,7 +226,9 @@ typedef RoutePredicate = bool Function(Route<dynamic> route);
 Navigator.of(context).pushNamedAndRemoveUntil('/LoginScreen', (Route<dynamic> route) => false);
 ```
 * 如果想在弹出新路由之前，删除路由栈中的部分路由。比如只弹出Screen1路由上面的Screen3和Screen2，然后再push新的Screen4，堆栈的情况如下图：
+
 ![](https://user-gold-cdn.xitu.io/2019/2/3/168b279818e79c56?w=213&h=82&f=png&s=977)
+
 利用ModalRoute.withName(name)，来执行判断，可以看下面的源码，当所传的name跟堆栈中的路由所定义的时候，会返回true值，不匹配的话，则返回false。
 ```
 Navigator.of(context).pushNamedAndRemoveUntil('/screen4',ModalRoute.withName('/screen1'));
@@ -307,6 +316,7 @@ Navigator.of(context).pushNamedAndRemoveUntil("/login", (Route<dynamic> route) =
 ```
 
 ## 代码链接
+
 [https://github.com/LXD312569496/flutter-learing/navigator_learning](https://github.com/LXD312569496/flutter-learing/navigator_learning)
 
 欢迎大家关注我的公众号，会推送关于Flutter和Android学习的一些文章
