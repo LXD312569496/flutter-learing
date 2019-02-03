@@ -27,6 +27,7 @@
 
 ##### 8. [根据platform显示对应风格的widget](https://github.com/LXD312569496/flutter-learing/tree/master/platform_widget_learning)
 
+##### 9. [Flutter中管理路由栈的方法和应用](https://github.com/LXD312569496/flutter-learing/tree/master/navigator_learning)
 
 ### 自己写的Demo
 
