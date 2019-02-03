@@ -254,6 +254,7 @@ Navigator.of(context).popUntil(ModalRoute.withName("/XXX"));
 
 ## 实战
 这里写了一个Demo，将上面的几种管理栈的用法都运用了一下。
+
 <img src="https://user-gold-cdn.xitu.io/2019/2/3/168b2f2a94dd26d2" width=300 height=600/>
 
 ```
@@ -320,6 +321,7 @@ Navigator.of(context).pushNamedAndRemoveUntil("/login", (Route<dynamic> route) =
 [https://github.com/LXD312569496/flutter-learing/navigator_learning](https://github.com/LXD312569496/flutter-learing/navigator_learning)
 
 欢迎大家关注我的公众号，会推送关于Flutter和Android学习的一些文章
+
 <img src="https://user-gold-cdn.xitu.io/2019/2/2/168acc8ef6a38b77?w=430&h=430&f=jpeg&s=39449" width=200 height-200/>
 
 ## 下一步
