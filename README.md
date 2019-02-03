@@ -4,6 +4,7 @@
 ##### 掘金:入魔的冬瓜，[https://juejin.im/user/578d6f466be3ff006cee847d](https://juejin.im/user/578d6f466be3ff006cee847d)
 ##### Github：[https://github.com/LXD312569496/flutter-learing](https://github.com/LXD312569496/flutter-learing)
 #####  CSDN:入魔的冬瓜，[https://me.csdn.net/weixin_34999505](https://me.csdn.net/weixin_34999505)
+##### 简书：入魔的冬瓜，[https://www.jianshu.com/u/093a0cc6c22b](https://www.jianshu.com/u/093a0cc6c22b)
 #####  公众号:入魔的冬瓜
 
 <img src="https://user-gold-cdn.xitu.io/2019/2/2/168acc8ef6a38b77?w=430&h=430&f=jpeg&s=39449" width=200 height=200>
